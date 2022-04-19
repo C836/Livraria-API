@@ -1,6 +1,6 @@
 import express from "express";
-import Usuario from './../../model/user.js'
-import database from './../infra/database.js'
+import cliente from '../../model/clientes.js'
+import database from './../../infra/database.js'
 
 const router = express.Router();
 
@@ -12,7 +12,7 @@ router.get('/', (req,res)=>{
 //Buscar usuários por ID
 router.get('/id/:id', (req,res)=>{
     const id = req.params.id
-    const pesquisa = database.usuarios[id];
+    const pesquisa = database.clientes[id];
 
     res.send(pesquisa)
 })
@@ -20,16 +20,16 @@ router.get('/id/:id', (req,res)=>{
 //Inserir novo usuário
 router.post('/add', (req,res)=>{
     const body = req.body
-    const newUser = new Usuario(body.nome, body.sobrenome, body.email, body.senha)
+    const newUser = new cliente(body.nome, body.sobrenome, body.cpf, body.email, body.telefone)
 
-    database.usuarios.push(newUser)
+    database.clientes.push(newUser)
     res.send(`Usuário ${newUser.nome} ${newUser.sobrenome} adicionado com sucesso.`)
 })
 
 //Apagar usuário por ID
 router.delete('/delete/:id', (req,res)=>{
     const id = req.params.id;
-    database.usuarios.splice(id, 1)
+    database.clientes.splice(id, 1)
 
     res.send(`Id "${id}" removido do banco de dados.`)
 })
@@ -41,13 +41,14 @@ router.patch('/update/:id', (req,res)=>{
     
     let usuarioEdit = {
         id: id, 
-        nome: body.nome!==undefined ? body.nome : database.usuarios[id].nome, 
-        sobrenome: body.sobrenome!==undefined ? body.sobrenome : database.usuarios[id].sobrenome, 
-        email: body.email!==undefined ? body.email : database.usuarios[id].email, 
-        senha: body.senha!==undefined ? body.senha : database.usuarios[id].senha, 
+        nome: body.nome!==undefined ? body.nome : database.clientes[id].nome, 
+        sobrenome: body.sobrenome!==undefined ? body.sobrenome : database.clientes[id].sobrenome, 
+        cpf: body.cpf!==undefined ? body.cpf : database.clientes[id].cpf, 
+        email: body.email!==undefined ? body.email : database.clientes[id].email, 
+        telefone: body.telefone!==undefined ? body.telefone : database.clientes[id].telefone, 
     };
 
-    database.usuarios[id] = usuarioEdit;
+    database.clientes[id] = usuarioEdit;
 
     res.send(`Id "${id}" atualizado.`)
 })

@@ -10,4 +10,4 @@ app.listen(3000, ()=>{
     console.log("Servidor rodando na porta 3000");
 });
 
-app.use('/users', router)
+app.use('/clientes', router)

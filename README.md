@@ -1,5 +1,5 @@
-# Livraria API
-Sistema de registro de usuários de uma livraria seguindo o padrão API Rest.
+# Registro-de-Usuarios-API
+Sistema de registro de usuários seguindo o padrão API Rest.
 
 # Rotas
 <h3>Usuários</h3>
@@ -13,26 +13,38 @@ Sistema de registro de usuários de uma livraria seguindo o padrão API Rest.
             "id": 0,
             "nome": "Lucas",
             "sobrenome": "Silva",
+            "cpf": 12345678900
             "email": "LucasS88@gmail.com",
-            "senha": "98cachorrinho98"
+            "telefone": 12345678
         }
+        {
+            "id": 1,
+            "nome": "João",
+            "sobrenome": "Carlos",
+            "cpf": 12345678900
+            "email": "Joooooao48@gmail.com",
+            "telefone": 12345678
+        }
+    ]
+}
     ]
 }
 ```
 
 </li>
 
-<li><p>Listar usuário por ID: <b>http://localhost:3000/users/id/6</b></p>
+<li><p>Listar usuário por ID: <b>http://localhost:3000/users/id/1</b></p>
 
 ```
 {
     "usuarios": [
         {
-            "id": 6,
+            "id": 1,
             "nome": "João",
             "sobrenome": "Carlos",
+            "cpf": 12345678900
             "email": "Joooooao48@gmail.com",
-            "senha": "s3nh4b0a!"
+            "telefone": 12345678
         }
     ]
 }
@@ -47,8 +59,9 @@ Sistema de registro de usuários de uma livraria seguindo o padrão API Rest.
 {
     "nome": "Lucas",
     "sobrenome": "Silva",
+    "cpf": 12345678900
     "email": "LucasS88@gmail.com",
-    "senha": "98cachorrinho98"
+    "telefone": 12345678
 }
 
 > Usuário Lucas Silva adicionado com sucesso.
@@ -56,23 +69,24 @@ Sistema de registro de usuários de uma livraria seguindo o padrão API Rest.
 </li>
 
 <li>
-<p>Apagar usuário por id: <b>http://localhost:3000/users/delete/2</b></p>
+<p>Apagar usuário por id: <b>http://localhost:3000/users/delete/1</b></p>
 
 ```
 {
-    "id": 2
-    "nome": "Lucas",
-    "sobrenome": "Silva",
-    "email": "LucasS88@gmail.com",
-    "senha": "98cachorrinho98"
+    "id": 1,
+    "nome": "João",
+    "sobrenome": "Carlos",
+    "cpf": 12345678900
+    "email": "Joooooao48@gmail.com",
+    "telefone": 12345678
 }
 
-> "Id "2" removido do banco de dados."
+> "Id "1" removido do banco de dados."
 ```
 </li>
 
 <li>
-<p>Atualizar usuário por id: <b>http://localhost:3000/users/update/3</b></p>
+<p>Atualizar usuário por id: <b>http://localhost:3000/users/update/1</b></p>
 
 ```
 {
@@ -80,6 +94,6 @@ Sistema de registro de usuários de uma livraria seguindo o padrão API Rest.
     "email": "LucasSilveira@gmail.com",
 }
 
-> Id "3" atualizado.
+> Id "1" atualizado.
 ```
 </li>
