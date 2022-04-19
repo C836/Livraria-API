@@ -1,5 +1,5 @@
-# Registro-de-Usuarios-API
-Sistema de registro de usuários seguindo o padrão API Rest.
+# Livraria API
+Sistema de registro de usuários de uma livraria seguindo o padrão API Rest.
 
 # Rotas
 <h3>Usuários</h3>
