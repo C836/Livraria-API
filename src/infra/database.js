@@ -1,5 +1,6 @@
 let database = {
-    "clientes":[],
+    "clientes":[],"funcionarios":[],
+
 }
 
 export default database
