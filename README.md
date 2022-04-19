@@ -4,11 +4,11 @@ Sistema de registro de usuários seguindo o padrão API Rest.
 # Rotas
 <h3>Usuários</h3>
 <ul>
-<li><p>Listar todos os usuários: <b>http://localhost:3000/users</b></p>
+<li><p>Listar todos os usuários: <b>http://localhost:3000/clientes</b></p>
 
 ```
 {
-    "usuarios": [
+    "clientes": [
         {
             "id": 0,
             "nome": "Lucas",
@@ -33,11 +33,11 @@ Sistema de registro de usuários seguindo o padrão API Rest.
 
 </li>
 
-<li><p>Listar usuário por ID: <b>http://localhost:3000/users/id/1</b></p>
+<li><p>Listar usuário por ID: <b>http://localhost:3000/clientes/id/1</b></p>
 
 ```
 {
-    "usuarios": [
+    "clientes": [
         {
             "id": 1,
             "nome": "João",
@@ -53,7 +53,7 @@ Sistema de registro de usuários seguindo o padrão API Rest.
 </li>
 
 <li>
-<p>Inserir usuário: <b>http://localhost:3000/users/add</b></p>
+<p>Inserir usuário: <b>http://localhost:3000/clientes/add</b></p>
 
 ```
 {
@@ -69,7 +69,7 @@ Sistema de registro de usuários seguindo o padrão API Rest.
 </li>
 
 <li>
-<p>Apagar usuário por id: <b>http://localhost:3000/users/delete/1</b></p>
+<p>Apagar usuário por id: <b>http://localhost:3000/clientes/delete/1</b></p>
 
 ```
 {
@@ -86,7 +86,7 @@ Sistema de registro de usuários seguindo o padrão API Rest.
 </li>
 
 <li>
-<p>Atualizar usuário por id: <b>http://localhost:3000/users/update/1</b></p>
+<p>Atualizar usuário por id: <b>http://localhost:3000/clientes/update/1</b></p>
 
 ```
 {
