@@ -1,0 +1,12 @@
+let id = 0
+class fornecedor{
+    constructor(nome,cnpj,endereço,contaBancaria ){
+        this.id = id++;
+        this.nome = nome;
+        this.cnpj = cnpj;
+        this.endereço = endereço;
+        this.contaBancaria = contaBancaria;
+    }
+}
+
+export default fornecedor
