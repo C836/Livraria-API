@@ -35,7 +35,7 @@ Sistema de registro de clientes seguindo o padrão API Rest.
         {
             "id": 2,
             "nome": "Maria",
-            "sobrenome": "Britto",
+            "sobrenome": "Brito",
             "cpf": 09325858096
             "email": "mariaaAAA20@gmail.com",
             "telefone": 6627644471
@@ -49,16 +49,16 @@ Sistema de registro de clientes seguindo o padrão API Rest.
 |---|---|---|---|---|---|
 |0|Lucas|Silva|31673948030|LucasBac4no9@gmail<span>.com</span>|9836447972
 |1|João|Carlos|32648918086|Joao99Carlos99@gmail<span>.com</span>|6627644471
-|2|Maria|Britto|09325858096|mariaaAAA20@gmail<span>.com</span>|6627644471
+|2|Maria|Brito|09325858096|mariaaAAA20@gmail<span>.com</span>|6627644471
 
 </li>
+
 ---
+
 <li><p>Listar cliente por ID: <b>http://localhost:3000/clientes/id/1</b></p>
 <details>
 <summary>Modelo JSON</summary>
 <pre><code>
-
-```
 {
     "usuarios": [
         {
@@ -71,7 +71,6 @@ Sistema de registro de clientes seguindo o padrão API Rest.
         }
     ]
 }
-```
 </pre></code>
 </details>
 
@@ -80,34 +79,35 @@ Sistema de registro de clientes seguindo o padrão API Rest.
 |1|Lucas|Silva|31673948030|LucasBac4no9@gmail<span>.com</span>|9836447972
 
 </li>
+
 ---
+
 <li>
 <p>Inserir cliente: <b>http://localhost:3000/clientes/add</b></p>
 <details>
 <summary>Modelo JSON</summary>
 <pre><code>
-
-```
 {
     "nome": "Maria",
-    "sobrenome": "Britto",
+    "sobrenome": "Brito",
     "cpf": 09325858096
     "email": "mariaaAAA20@gmail.com",
     "telefone": 6627644471
 }
-```
 </code></pre>
 </details>
 
 |id|nome|sobrenome|cpf|email|telefone|
 |---|---|---|---|---|---|
-|2|Maria|Britto|09325858096|mariaaAAA20@gmail<span>.com</span>|6627644471
+|2|Maria|Brito|09325858096|mariaaAAA20@gmail<span>.com</span>|6627644471
 
 
-> Cliente "Maria Britto" adicionado com sucesso.
+> Cliente "Maria Brito" adicionado com sucesso.
 
 </li>
+
 ---
+
 <li>
 <p>Apagar cliente por id: <b>http://localhost:3000/clientes/delete/1</b></p>
 
@@ -118,20 +118,18 @@ Sistema de registro de clientes seguindo o padrão API Rest.
 > "Id "1" removido do banco de dados."
 
 </li>
+
 ---
+
 <li>
 <p>Atualizar cliente por id: <b>http://localhost:3000/clientes/update/0</b></p>
 <details>
 <summary>Modelo JSON</summary>
 <pre><code>
-
-```
 {
     "sobrenome": "Silveira",
     "email": "LucasSilveira@gmail.com",
 }
-```
-
 </code></pre>
 </details>
 
