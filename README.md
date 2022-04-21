@@ -1,10 +1,10 @@
 # Registro-de-Usuarios-API
-Sistema de registro de usuários seguindo o padrão API Rest.
+Sistema de registro de clientes seguindo o padrão API Rest.
 
 # Rotas
-<h3>Usuários</h3>
+<h3>Clientes</h3>
 <ul>
-<li><p>Listar todos os usuários: <b>http://localhost:3000/users</b></p>
+<li><p>Listar todos os clientes: <b>http://localhost:3000/users</b></p>
 
 ```
 {
@@ -27,13 +27,11 @@ Sistema de registro de usuários seguindo o padrão API Rest.
         }
     ]
 }
-    ]
-}
 ```
 
 </li>
 
-<li><p>Listar usuário por ID: <b>http://localhost:3000/users/id/1</b></p>
+<li><p>Listar cliente por ID: <b>http://localhost:3000/users/id/1</b></p>
 
 ```
 {
@@ -53,7 +51,7 @@ Sistema de registro de usuários seguindo o padrão API Rest.
 </li>
 
 <li>
-<p>Inserir usuário: <b>http://localhost:3000/users/add</b></p>
+<p>Inserir cliente: <b>http://localhost:3000/users/add</b></p>
 
 ```
 {
@@ -64,12 +62,12 @@ Sistema de registro de usuários seguindo o padrão API Rest.
     "telefone": 12345678
 }
 
-> Usuário Lucas Silva adicionado com sucesso.
+> Cliente Lucas Silva adicionado com sucesso.
 ```
 </li>
 
 <li>
-<p>Apagar usuário por id: <b>http://localhost:3000/users/delete/1</b></p>
+<p>Apagar cliente por id: <b>http://localhost:3000/users/delete/1</b></p>
 
 ```
 {
@@ -86,7 +84,7 @@ Sistema de registro de usuários seguindo o padrão API Rest.
 </li>
 
 <li>
-<p>Atualizar usuário por id: <b>http://localhost:3000/users/update/1</b></p>
+<p>Atualizar cliente por id: <b>http://localhost:3000/users/update/1</b></p>
 
 ```
 {

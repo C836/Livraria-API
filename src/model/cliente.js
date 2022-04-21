@@ -4,9 +4,13 @@ class cliente{
         this.id = id++;
         this.nome = nome;
         this.sobrenome = sobrenome;
-        this.cpf = cpf;
+        this.cpf = this.validar(cpf);
         this.email = email;
-        this.telefone = telefone
+        this.telefone = telefone;
+    }
+    validar(cpf){
+        if(cpf.length===11) return cpf
+        else throw new Error ('erro')
     }
 }
 
