@@ -4,7 +4,6 @@ import bodyParser from 'body-parser'
 import router_clientes from './controllers/routes/clientes.js';
 
 const app = express();
-
 app.use(bodyParser.json());
 
 app.listen(3000, ()=>{
