@@ -1,5 +1,5 @@
-import express, { response } from "express";
-import cliente  from '../../models/cliente.js'
+import express from "express";
+import cliente  from '../../models/model_cliente.js'
 import criarTabelaClientes, { inserirCliente, exibirClientes, exibirCliente, deletarCliente, editarCliente} from '../../DAO/clientes.js'
 
 criarTabelaClientes()
@@ -44,6 +44,12 @@ router_clientes.delete('/delete/:id', (req,res)=>{
         res.send(`Id "${id}" removido do banco de dados.`)
     })
 })
+
+// router_clientes.delete('/deleteAll/', (req,res)=>{
+//     limparTabela(response=>{
+//         res.send(`Todos os valores deletados`)
+//     })
+// })
 
 //Modificar propriedades de um usuário por seu ID
 router_clientes.patch('/update/:id', (req,res)=>{

@@ -14,14 +14,12 @@ export default async function criarTabelaClientes(){
     })
 }
 
-
 export async function exibirClientes(response){
     openDb().then(db=>{
         db.all(`SELECT * FROM Clientes`)
         .then(res=>response(res))
     })
 }
-
 
 export async function exibirCliente(id, response){
     openDb().then(db=>{
@@ -69,3 +67,13 @@ export async function deletarCliente(id, response){
         .then(response(true))
     })
 }
+
+// export async function limparTabela(response){
+//     openDb().then(db=>{
+//         db.get(`
+//         DELETE FROM Clientes;
+//         UPDATE 'sqlite_sequence' SET 'seq'=0 WHERE 'name'='Clientes';
+//         DELETE FROM 'sqlite_sequence' WHERE NAME='Clientes'`)
+//         .then(response(true))
+//     })
+// }
