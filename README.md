@@ -97,3 +97,7 @@ Sistema de registro de usuários seguindo o padrão API Rest.
 > Id "1" atualizado.
 ```
 </li>
+-----------
+<h3>Fornecedores</h3>
+<ul>
+<li><p>Listar todos os fornecedores: <b>http://localhost:3000/fornecedores</b></p>
