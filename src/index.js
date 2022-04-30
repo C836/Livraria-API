@@ -1,13 +1,15 @@
 import express from 'express'
 import bodyParser from 'body-parser'
-import router from './controllers/routes/routes.js';
 
+import router_livros from './controllers/routes/rota_livros.js';
+
+const PORT = process.env.PORT||8000
 const app = express();
 
 app.use(bodyParser.json());
 
-app.listen(3000, ()=>{
-    console.log("Servidor rodando na porta 3000");
+app.listen(PORT, ()=>{
+    console.log("Servidor rodando na porta " + PORT);
 });
 
-app.use('/clientes', router)
+app.use('/livros', router_livros)
