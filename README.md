@@ -4,13 +4,14 @@ Sistema de registro de clientes seguindo o padrão API Rest.
 <h2>Inicialização</h2>
 Em um terminal de sua escolha (powershell, cmd etc...), digite os seguintes comandos para instalar e inicializar a aplicação;
 </p>
-```sh
+
+```r
 # selecionar diretório para a instalação
 > cd [caminho do arquivo]
-
+⠀
 # instalar as dependências do projeto
 > npm install
-
+⠀
 # iniciar aplicação
 > npm start
 ```
