@@ -1,18 +1,18 @@
 import express from "express";
-import cliente  from '../../models/model_cliente.js'
-import criarTabelaClientes, { inserirCliente, exibirClientes, exibirCliente, deletarCliente, editarCliente} from '../../DAO/clientes.js'
+import cliente  from '../../models/model_clientes.js'
+import criarTabelaClientes, { exibirClientes, exibirCliente, inserirCliente, deletarCliente, editarCliente} from '../../DAO/clientes.js'
 
 criarTabelaClientes()
 const router_clientes = express.Router();
 
-//Listar todos os usuários 
+//Listar todos os clientes 
 router_clientes.get('/', (req,res)=>{
     exibirClientes((response)=>{
         res.json(response)
     })
 })
 
-//Buscar usuários por ID
+//Buscar cliente por ID
 router_clientes.get('/id/:id', (req,res)=>{
     const id = req.params.id
     exibirCliente(id, response=>{
@@ -21,7 +21,7 @@ router_clientes.get('/id/:id', (req,res)=>{
     })
 })
 
-//Inserir novo usuário
+//Inserir novo cliente
 router_clientes.post('/add', (req,res)=>{
     const body = req.body;
     const newCliente = new cliente(
@@ -37,7 +37,7 @@ router_clientes.post('/add', (req,res)=>{
     })
 })
 
-//Apagar usuário por ID
+//Apagar cliente por ID
 router_clientes.delete('/delete/:id', (req,res)=>{
     const id = req.params.id;
     deletarCliente(id, response=>{
@@ -45,13 +45,7 @@ router_clientes.delete('/delete/:id', (req,res)=>{
     })
 })
 
-// router_clientes.delete('/deleteAll/', (req,res)=>{
-//     limparTabela(response=>{
-//         res.send(`Todos os valores deletados`)
-//     })
-// })
-
-//Modificar propriedades de um usuário por seu ID
+//Modificar propriedades de um cliente por seu ID
 router_clientes.patch('/update/:id', (req,res)=>{
     const id = req.params.id;
     const body = req.body;
@@ -62,7 +56,7 @@ router_clientes.patch('/update/:id', (req,res)=>{
             body.sobrenome!==undefined? body.sobrenome : oldCliente[0].sobrenome, 
             body.cpf!==undefined? body.cpf : oldCliente[0].cpf, 
             body.email!==undefined? body.email : oldCliente[0].email, 
-            body.telefone!==undefined? body.telefone : oldCliente[0].telefone,
+            body.telefone!==undefined? body.telefone : oldCliente[0].telefone
         )
 
         editarCliente(id, newCliente, response=>{       

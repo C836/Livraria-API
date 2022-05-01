@@ -67,13 +67,3 @@ export async function deletarCliente(id, response){
         .then(response(true))
     })
 }
-
-// export async function limparTabela(response){
-//     openDb().then(db=>{
-//         db.get(`
-//         DELETE FROM Clientes;
-//         UPDATE 'sqlite_sequence' SET 'seq'=0 WHERE 'name'='Clientes';
-//         DELETE FROM 'sqlite_sequence' WHERE NAME='Clientes'`)
-//         .then(response(true))
-//     })
-// }
