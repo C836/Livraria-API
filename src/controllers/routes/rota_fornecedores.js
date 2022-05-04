@@ -1,18 +1,18 @@
 import express from "express";
-import criarTabelaFornecedores, { exibirFornecedores, exibirFornecedor, inserirFornecedores, deletarFornecedores, editarFornecedores} from '../../DAO/fornecedores.js'
-import fornecedor from "../../model/modelFornecedores.js";
+import fornecedor from "../../models/model_fornecedores.js";
+import criarTabelaFornecedores, { exibirFornecedores, exibirFornecedor, inserirFornecedor, deletarFornecedor, editarFornecedor} from '../../DAO/fornecedores.js'
 
 criarTabelaFornecedores()
 const router_Fornecedores = express.Router();
 
-//Listar todos os usuários 
+//Listar todos os fornecedores 
 router_Fornecedores.get('/', (req,res)=>{
     exibirFornecedores((response)=>{
         res.json(response)
     })
 })
 
-//Buscar usuários por ID
+//Buscar fornecedores por ID
 router_Fornecedores.get('/id/:id', (req,res)=>{
     const id = req.params.id
     exibirFornecedor(id, response=>{
@@ -21,7 +21,7 @@ router_Fornecedores.get('/id/:id', (req,res)=>{
     })
 })
 
-//Inserir novo usuário
+//Inserir novo fornecedor
 router_Fornecedores.post('/add', (req,res)=>{
     const body = req.body;
     const newFornecedores = new fornecedor(
@@ -31,20 +31,20 @@ router_Fornecedores.post('/add', (req,res)=>{
         body.conta_bancaria
     )
 
-    inserirFornecedores(newFornecedores, response=>{
+    inserirFornecedor(newFornecedores, response=>{
         res.send(`Fornecedor ${newFornecedores.nome} ${newFornecedores.sobrenome} adicionado com sucesso.`)
     })
 })
 
-//Apagar usuário por ID
+//Apagar fornecedor por ID
 router_Fornecedores.delete('/delete/:id', (req,res)=>{
     const id = req.params.id;
-    deletarFornecedores(id, response=>{
+    deletarFornecedor(id, response=>{
         res.send(`Id "${id}" removido do banco de dados.`)
     })
 })
 
-//Modificar propriedades de um usuário por seu ID
+//Modificar propriedades de um fornecedor por seu ID
 router_Fornecedores.patch('/update/:id', (req,res)=>{
     const id = req.params.id;
     const body = req.body;
@@ -57,7 +57,7 @@ router_Fornecedores.patch('/update/:id', (req,res)=>{
             body.conta_bancaria!==undefined? body.conta_bancaria : oldFornecedor[0].conta_bancaria,
         )
 
-        editarFornecedores(id, newFornecedor, response=>{       
+        editarFornecedor(id, newFornecedor, response=>{       
             res.send(`Id "${id}" atualizado.\n\n ${JSON.stringify(newFornecedor, null, 2)}` )
         })
     })

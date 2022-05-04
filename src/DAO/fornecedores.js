@@ -13,7 +13,6 @@ export default async function criarTabelaFornecedores(){
     })
 }
 
-
 export async function exibirFornecedores(response){
     openDb().then(db=>{
         db.all(`SELECT * FROM Fornecedores`)
@@ -29,39 +28,39 @@ export async function exibirFornecedor(id, response){
     })
 }
 
-export async function inserirFornecedores(Fornecedores, response){
+export async function inserirFornecedor(fornecedor, response){
     openDb().then(db=>{
         db.run(`
             INSERT INTO Fornecedores(
             nome,cnpj,endereco,contaBancaria) 
             VALUES(?,?,?,?)`,[
-            Fornecedores.nome,
-            Fornecedores.cnpj,
-            Fornecedores.endereco,
-            Fornecedores.contaBancaria,
+            fornecedor.nome,
+            fornecedor.cnpj,
+            fornecedor.endereco,
+            fornecedor.contaBancaria,
           
         ])
         .then(response(true))
     })
 }
 
-export async function editarFornecedores(id, Fornecedores, response){
+export async function editarFornecedor(id, fornecedor, response){
     openDb().then(db=>{
         db.run(`
             UPDATE Fornecedores SET
             nome=?, cnpj=?, endereco=?, contaBancaria=?
             WHERE id=?`,[
-            Fornecedores.nome,
-            Fornecedores.cnpj,
-            Fornecedores.endereco,
-            Fornecedores.contaBancaria,
+            fornecedor.nome,
+            fornecedor.cnpj,
+            fornecedor.endereco,
+            fornecedor.contaBancaria,
             id
         ])
         .then(res=> response(res))
     })
 }
 
-export async function deletarFornecedores(id, response){
+export async function deletarFornecedor(id, response){
     openDb().then(db=>{
         db.get(`DELETE FROM "Fornecedores" WHERE id = ${id}`)
         .then(response(true))

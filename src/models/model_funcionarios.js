@@ -1,6 +1,6 @@
 let id = 0
 class funcionarios{
-    constructor(nome, sobrenome, data_nascimento, data_admissao, telefone, e_mail, funcao){
+    constructor(nome, sobrenome, data_nascimento, data_admissao, telefone, email, funcao){
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.data_nascimento = data_nascimento;
@@ -9,7 +9,6 @@ class funcionarios{
         this.email = email;
         this.funcao = funcao;
     }
-
 }
 
 export default funcionarios

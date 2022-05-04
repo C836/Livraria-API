@@ -1,13 +1,14 @@
 import { openDb } from "../infra/configdb.js"
 
-export default async function criarTabelaAluguel(){
+export default async function criarTabelaAlugueis(){
     console.log ("Run!")
     openDb().then(db=>{
         db.exec(`
-            CREATE TABLE IF NOT EXISTS Aluguel(
+            CREATE TABLE IF NOT EXISTS Alugueis(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             livro TEXT,
             nome TEXT,
+            sobrenome TEXT,
             data_de_aluguel DATE,
             forma_de_pagamento TEXT,
             data_de_entrega DATE
@@ -18,7 +19,7 @@ export default async function criarTabelaAluguel(){
 
 export async function exibirAlugueis(response){
     openDb().then(db=>{
-        db.all(`SELECT * FROM Aluguel`)
+        db.all(`SELECT * FROM Alugueis`)
         .then(res=>response(res))
     })
 }
@@ -26,7 +27,7 @@ export async function exibirAlugueis(response){
 
 export async function exibirAluguel(id, response){
     openDb().then(db=>{
-        db.all(`SELECT * FROM "Aluguel" WHERE id = ${id}`)
+        db.all(`SELECT * FROM "Alugueis" WHERE id = ${id}`)
         .then(res=>response(res))
     })
 }
@@ -34,11 +35,12 @@ export async function exibirAluguel(id, response){
 export async function inserirAluguel(Aluguel, response){
     openDb().then(db=>{
         db.run(`
-            INSERT INTO Aluguel(
-            livro,nome,data_de_aluguel,forma_de_pagamento,data_de_entrega) 
-            VALUES(?,?,?,?,?)`,[
+            INSERT INTO Alugueis(
+            livro,nome,sobrenome,data_de_aluguel,forma_de_pagamento,data_de_entrega) 
+            VALUES(?,?,?,?,?,?)`,[
             Aluguel.livro,
             Aluguel.nome,
+            Aluguel.sobrenome,
             Aluguel.data_de_aluguel,
             Aluguel.forma_de_pagamento,
             Aluguel.data_de_entrega,
@@ -50,11 +52,12 @@ export async function inserirAluguel(Aluguel, response){
 export async function editarAluguel(id, Aluguel, response){
     openDb().then(db=>{
         db.run(`
-            UPDATE Aluguel SET
-            livro=?, nome=?, data_de_aluguel=?, forma_de_pagamento=?, data_de_entrega=?
+            UPDATE Alugueis SET
+            livro=?, nome=?, sobrenome=?, data_de_aluguel=?, forma_de_pagamento=?, data_de_entrega=?
             WHERE id=?`,[
             Aluguel.livro,
             Aluguel.nome,
+            Aluguel.sobrenome,
             Aluguel.data_de_aluguel,
             Aluguel.forma_de_pagamento,
             Aluguel.data_de_entrega,
@@ -66,7 +69,7 @@ export async function editarAluguel(id, Aluguel, response){
 
 export async function deletarAluguel(id, response){
     openDb().then(db=>{
-        db.get(`DELETE FROM Aluguel WHERE id = ${id}`)
+        db.get(`DELETE FROM Alugueis WHERE id = ${id}`)
         .then(response(true))
     })
 }

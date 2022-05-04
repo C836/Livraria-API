@@ -1,16 +1,16 @@
 import express from "express";
-import funcionarios from '../../model/funcionarios.js'
-import criarTabelaFuncionarios, {exibirFuncionarios, inserirFuncionarios, exibirFuncionario, editarFuncionario, deletarFuncionario} from '../../DAO/funcionarios.js'
-criarTabelaFuncionarios()
+import funcionario from '../../models/model_funcionarios.js'
+import criarTabelaFuncionarios, {exibirFuncionarios, exibirFuncionario, inserirFuncionario, deletarFuncionario, editarFuncionario } from '../../DAO/funcionarios.js'
 
+criarTabelaFuncionarios()
 const router_funcionarios = express.Router();
 
-//Listar todos os usuários 
+//Listar todos os funcionarios
 router_funcionarios.get('/', (req,res)=>{
     exibirFuncionarios((response) => (res.send(response)));
 })
 
-// Buscar usuários por ID
+//Buscar funcionario por ID
 router_funcionarios.get('/id/:id', (req,res)=>{
     const id = req.params.id
     exibirFuncionario(id, response => {
@@ -22,16 +22,15 @@ router_funcionarios.get('/id/:id', (req,res)=>{
     })
 })
 
-//Inserir novo usuário
+//Inserir novo funcionário
 router_funcionarios.post('/add', (req,res)=>{
     const body = req.body
-    const newFuncionarios = new funcionarios(body.nome, body.sobrenome, body.data_nascimento, body.data_admissao, body.telefone, body.email, body.funcao)
+    const newFuncionario = new funcionario(body.nome, body.sobrenome, body.data_nascimento, body.data_admissao, body.telefone, body.email, body.funcao)
 
-    inserirFuncionarios(newFuncionarios, response => {res.send(`Funcionário ${newFuncionarios.nome} adicionado`)})
-
+    inserirFuncionario(newFuncionario, response => {res.send(`Funcionário ${newFuncionario.nome} adicionado`)})
 })
 
-//Modificar propriedades de um usuário por seu ID
+//Modificar propriedades de um funcionário por seu ID
 router_funcionarios.patch('/update/:id', (req,res)=>{
     const id = req.params.id;
     const body = req.body;
@@ -45,7 +44,6 @@ router_funcionarios.patch('/update/:id', (req,res)=>{
             body.telefone!==undefined? body.telefone : oldFuncionario[0].telefone,
             body.email!==undefined? body.email : oldFuncionario[0].email,
             body.funcao!==undefined? body.funcao : oldFuncionario[0].funcao,
-            
         )
 
         editarFuncionario(id, newFuncionario, response=>{       
@@ -54,7 +52,7 @@ router_funcionarios.patch('/update/:id', (req,res)=>{
     })
 })
 
-//Apagar usuário por ID
+//Apagar funcionário por ID
 router_funcionarios.delete('/delete/:id', (req,res)=>{
     const id = req.params.id;
     deletarFuncionario(id, response =>{

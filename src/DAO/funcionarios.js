@@ -30,37 +30,37 @@ export async function exibirFuncionario(id, response){
     })
 }
 
-export async function inserirFuncionarios(Funcionarios, response){
+export async function inserirFuncionario(funcionario, response){
     openDb().then(db=>{
         db.run(`
             INSERT INTO Funcionarios(
             nome,sobrenome,data_nascimento,data_admissao,telefone,email,funcao) 
             VALUES(?,?,?,?,?,?,?)`,[
-            Funcionarios.nome,
-            Funcionarios.sobrenome,
-            Funcionarios.data_nascimento,
-            Funcionarios.data_admissao,
-            Funcionarios.telefone,
-            Funcionarios.email,
-            Funcionarios.funcao
+            funcionario.nome,
+            funcionario.sobrenome,
+            funcionario.data_nascimento,
+            funcionario.data_admissao,
+            funcionario.telefone,
+            funcionario.email,
+            funcionario.funcao
         ])
         .then(response(true))
     })
 }
 
-export async function editarFuncionario(id, Funcionario, response){
+export async function editarFuncionario(id, funcionario, response){
     openDb().then(db=>{
         db.run(`
             UPDATE Funcionarios SET
             nome=?, sobrenome=?, data_nascimento=?, data_admissao=?, telefone=?, email=?, funcao=?
             WHERE id=?`,[
-            Funcionarios.nome,
-            Funcionarios.sobrenome,
-            Funcionarios.data_nascimento,
-            Funcionarios.data_admissao,
-            Funcionarios.telefone,
-            Funcionarios.email,
-            Funcionarios.funcao,
+            funcionario.nome,
+            funcionario.sobrenome,
+            funcionario.data_nascimento,
+            funcionario.data_admissao,
+            funcionario.telefone,
+            funcionario.email,
+            funcionario.funcao,
             id
         ])
         .then(res=> response(res))

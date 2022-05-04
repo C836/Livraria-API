@@ -1,19 +1,19 @@
 import express from "express";
-import livros  from '../../model/livros.js'
+import livro  from '../../models/model_livros.js'
 import criarTabelaLivros , { exibirLivros, exibirLivro, inserirLivro, editarLivro, deletarLivro} from '../../DAO/livros.js'
 
 criarTabelaLivros()
 const router_livros = express.Router();
 
 
-//Listar todos os usuários 
+//Listar todos os livros
 router_livros.get('/', (req,res)=>{
     exibirLivros((response)=>{
         res.json(response)
     })
 })
 
-//Buscar usuários por ID
+//Buscar livro por ID
 router_livros.get('/id/:id', (req,res)=>{
     const id = req.params.id
     exibirLivro(id, response=>{
@@ -22,10 +22,10 @@ router_livros.get('/id/:id', (req,res)=>{
     })
 })
 
-//Inserir novo usuário
+//Inserir novo livro
 router_livros.post('/add', (req,res)=>{
     const body = req.body;
-    const newLivro = new livros(
+    const newLivro = new livro(
         body.isbn,
         body.titulo,
         body.autor ,
@@ -43,7 +43,7 @@ router_livros.post('/add', (req,res)=>{
     })
 })
 
-//Apagar usuário por ID
+//Apagar livro por ID
 router_livros.delete('/delete/:id', (req,res)=>{
     const id = req.params.id;
     deletarLivro(id, response=>{
@@ -51,15 +51,15 @@ router_livros.delete('/delete/:id', (req,res)=>{
     })
 })
 
-//Modificar propriedades de um usuário por seu ID
+//Modificar propriedades de um livro por seu ID
 router_livros.patch('/update/:id', (req,res)=>{
     const id = req.params.id;
     const body = req.body;
 
     exibirLivro(id, oldLivro=>{
-        const newLivro = new livros(
+        const newLivro = new livro(
             body.isbn !==undefined? body.isbn : oldLivro[0].isbn,
-            body.titulo !==undefined? titulo: oldLivro[0].titulo,
+            body.titulo !==undefined? body.titulo: oldLivro[0].titulo,
             body.autor !==undefined? body.autor : oldLivro[0].autor,
             body.lingua !==undefined? body.lingua : oldLivro[0].lingua ,
             body.editora !==undefined? body.editora : oldLivro[0].editora ,

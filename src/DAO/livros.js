@@ -73,7 +73,7 @@ export async function editarLivro(id, Livros, response){
                 Livros.preco ,
                 Livros.genero ,
                 Livros.quantidade ,
-            id
+                id
         ])
         .then(res=> response(res))
     })
