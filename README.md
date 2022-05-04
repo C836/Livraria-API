@@ -1,5 +1,6 @@
 <h1>Livraria API</h1>
-Sistema de registro de clientes seguindo o padrão API Rest.
+Sistema de registro em cadeia de uma livraria(livros, clientes, alugueis, funcionários e fornecedores) seguindo o padrão de interface API Rest. Foram implementados todos os métodos CRUD(CREATE, READ, UPDATE, DELETE) conforme o padrão DAO(<i>Data Access Object</i>) e a arquitetura MVC para o controle e organização de arquivos. 
+
 </p>
 <a href="https://livraria-apirest.herokuapp.com/">Web app</a>
 
