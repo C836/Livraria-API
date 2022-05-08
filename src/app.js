@@ -1,6 +1,5 @@
 import express from 'express'
 import bodyParser from 'body-parser'
-import {openDb} from './infra/configdb.js'
 import path from 'path';
 import cors from 'cors'
 
@@ -36,11 +35,3 @@ app.use('/clientes', router_clientes)
 app.use('/alugueis', router_alugueis)
 app.use('/funcionarios', router_funcionarios)
 app.use('/fornecedores', router_fornecedores)
-
-
-//IRREVERSIVEL
-app.post('/drop/:tabela', (req,res)=>{
-    openDb().then(db=>{
-        db.run(`DROP TABLE ${req.params.tabela}`)
-    })
-})

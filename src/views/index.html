@@ -1,287 +1,1447 @@
-<h1>Livraria API</h1>
-Sistema de registro de clientes seguindo o padrão API Rest.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        padding: 10px 2%; 
+        background-color: rgb(46, 50, 65);
+        color:white;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
-<h2>Rotas</h2>
+    a, a:visited{
+        text-decoration: none;
+        color: cornflowerblue;
+    }
+    
+    a:hover{
+        text-decoration: underline;
+    }
 
-<!-- LIVROS--->
+    pre{
+        border: 1px white solid;
+        margin: 5px;
+        padding: 2%;
+        border-radius: 5px;
+        background-color: rgba(0, 0, 0, 0.2);
+    }
+</style>
+<body>
+    <h1>Livraria API</h1>
+    Sistema de registro em cadeia de uma livraria(livros, clientes, alugueis, funcionários e fornecedores) seguindo o padrão de interface API Rest. Foram implementados todos os métodos CRUD(CREATE, READ, UPDATE, DELETE) conforme o padrão DAO(<i>Data Access Object</i>) e a arquitetura MVC para o controle e organização de arquivos. 
 
-<details>
-<summary>
-<span style=font-size:20px;color:white;>
-    <b>Livros</b>
-</span>
-</summary>
+    </p>
 
-<ul>
-<li><p>Listar todos os livros: <b>http://localhost:3000/livros</b></p>
-<details>
-<summary>Modelo JSON</summary>
-<pre><code>
-{
-    "livros": [
-        {
-            "id": 1,
-            "nome": "André",
-            "sobrenome": "Silva",
-            "cpf": 31673948030
-            "email": "AndréBac4no9@gmail.com",
-            "telefone": 9836447972
+    <h2>Inicialização</h2>
+
+    <ul>
+    <li><p>Instale o NodeJS atráves do link:
+    <a href="https://nodejs.org/en/download/" target="_blank">Download</a></p>
+    </p>
+    </li>
+    <li><p>Faça o download do projeto em ZIP na própria página do github ou faça o download em um terminal via git  com o seguinte comando:</p>
+    </li>
+    </ul>
+    <pre><code class="language-git">&gt; git clone https://github.com/C836/Livraria-API.git
+    </code></pre>
+    <ul>
+    <li>Em um terminal de sua escolha, digite os seguintes comandos para instalar e inicializar a aplicação;</p></li>
+    </ul>
+    <pre><code class="language-git">
+    # selecionar diretório para a instalação
+    &gt; cd [caminho do arquivo]
+    ⠀
+    # instalar as dependências do projeto
+    &gt; npm install
+    ⠀
+    # iniciar aplicação
+    &gt; npm start
+    </code></pre>
+    </p>
+
+    <ul>
+    <li>Utilize uma plataforma de consultas de API&#39;s e faça a requisição de acordo os modelos disponíveis na sessão abaixo.
+    </code></pre></li>
+    </ul>
+    </p>
+
+    <details>
+    <summary>
+    <span style=font-size:18px;><b>Modelos de requisição</b></span>
+
+    </summary>
+    </P>
+    <h5>Livros</h5>
+
+    <pre><code class="language-json">{
+        &quot;isbn&quot;: &quot;8535930043&quot;,
+        &quot;titulo&quot;: &quot;Guerra e Paz&quot;,
+        &quot;autor&quot;: &quot;Liev Tolstoi&quot;,
+        &quot;lingua&quot;: &quot;Pt-br&quot;,
+        &quot;editora&quot;: &quot;Companhia das Letras&quot;,
+        &quot;paginas&quot;: 1544,
+        &quot;publicacao&quot;: &quot;21/11/2017&quot;,
+        &quot;preco&quot;: &quot;137,90&quot;,
+        &quot;genero&quot;: &quot;Ficção Literária&quot;,
+        &quot;quantidade&quot;: 300
+    }
+    </code></pre>
+    </p>
+    <h5>Clientes</h5>
+
+    <pre><code class="language-json">{
+        &quot;nome&quot;: &quot;André&quot;,
+        &quot;sobrenome&quot;: &quot;Silva&quot;,
+        &quot;cpf&quot;: 31673948030,
+        &quot;email&quot;: &quot;AndréBac4no9@gmail.com&quot;,
+        &quot;telefone&quot;: 9836447972
+    }
+    </code></pre>
+    </p>
+    <h5>Alugueis</h5>
+
+    <pre><code class="language-json">{
+        &quot;livro&quot;: &quot;Guerra e Paz&quot;,
+        &quot;nome&quot;: &quot;André Silva&quot;,
+        &quot;data_de_aluguel&quot;:&quot;01/01/2022&quot;,
+        &quot;forma_de_pagamento&quot;: &quot;cartão de crédito&quot;,
+        &quot;data_de_entrega&quot;: &quot;25/01/2022&quot;,
+    }
+    </code></pre>
+    </p>
+    <h5>Funcionarios</h5>
+
+    <pre><code class="language-json">{
+        &quot;nome&quot;: &quot;Lucas&quot;,
+        &quot;sobrenome&quot;: &quot;Silva&quot;,
+        &quot;data_de_nascimento&quot;: &quot;27/06/2000&quot;,
+        &quot;data_de_admissao&quot;: &quot;23/04/2020&quot;,
+        &quot;telefone&quot;: 9836447972,
+        &quot;email&quot;: &quot;lucasBac4no9@gmail.com&quot;,
+        &quot;funcao&quot;: &quot;Auxiliar Administrativo&quot;
+        
+    }
+    </code></pre>
+    </p>
+    <h5>Fornecedores</h5>
+
+    <pre><code class="language-json">{
+        &quot;nome&quot;: &quot;Carlos Francisco&quot;,
+        &quot;cnpj&quot;: &quot;02.234.456/0001-89&quot;,
+        &quot;endereco&quot;:&quot;Rua Jacaré, 345, Vila Velha - BH/MG&quot;,
+        &quot;contaBancaria&quot;:&quot;Ag: 1234, Cc:12345-7&quot;
+    }
+    </code></pre>
+    </details>
+
+    <h3>Exemplos</h3>
+
+    <!-- LIVROS--->
+
+    <details>
+    <summary>
+    <span style=font-size:18px;>
+        <b>Livros</b>
+    </span>
+    </summary>
+
+    <ul>
+    <li><p>Listar todos os livros: <b>https://livraria-apirest.herokuapp.com/livros</b></p>
+    <details>
+    <summary>Modelo JSON</summary>
+    <pre><code>
+    {
+        "livros": [
+                    {
+                "id": 1,
+                "isbn": "8535930043",
+                "titulo": "Guerra e Paz",
+                "autor": "Liev Tolstoi",
+                "lingua": Pt-br
+                "editora": "Companhia das Letras",
+                "paginas": 1544,
+                "publicacao": "21/11/2017",
+                "preco": "137,90",
+                "genero": "Ficção Literária"
+                "quantidade": 300
+            },
+
+    <pre><code> {
+            &quot;id&quot;: 2,
+            &quot;isbn&quot;: &quot;8575226932&quot;,
+            &quot;titulo&quot;: &quot;Estruturas de Dados e Algoritmos com JavaScript: Escreva um Código JavaScript Complexo e Eficaz Usando a Mais Recente ECMAScript&quot;,
+            &quot;autor&quot;: &quot;Loiane Groner&quot;,
+            &quot;lingua&quot;: Pt-br
+            &quot;editora&quot;: &quot;Novatec Editora &quot;,
+            &quot;paginas&quot;: 408,
+            &quot;publicacao&quot;: &quot;11/03/2019&quot;,
+            &quot;preco&quot;: &quot;64,94&quot;,
+            &quot;genero&quot;: &quot;Programação de Computadores&quot;
+            &quot;quantidade&quot;: 12
         },
-        {
+
+    {
+            &quot;id&quot;: 3,
+            &quot;isbn&quot;: &quot;8575225405&quot;,
+            &quot;titulo&quot;: &quot;Aprendendo Node: Usando JavaScript no Servidor&quot;,
+            &quot;autor&quot;: &quot;Shelley Powers&quot;,
+            &quot;lingua&quot;: Pt-br
+            &quot;editora&quot;: &quot;Novatec Editora &quot;,
+            &quot;paginas&quot;: 312,
+            &quot;publicacao&quot;: &quot;24/01/2017&quot;,
+            &quot;preco&quot;: &quot;70,99&quot;,
+            &quot;genero&quot;: &quot;Programação de Computadores&quot;
+            &quot;quantidade&quot;: 29
+        },
+    ]
+    </code></pre>
+    <p>}
+    </code></pre></p>
+    </details>
+
+
+    <table>
+    <thead>
+    <tr>
+    <th>id</th>
+    <th>isbn</th>
+    <th>titulo</th>
+    <th>autor</th>
+    <th>lingua</th>
+    <th>editora</th>
+    <th>paginas</th>
+    <th>publicacao</th>
+    <th>preco</th>
+    <th>genero</th>
+    <th>quantidade</th>
+    </tr>
+    </thead>
+    <tbody><tr>
+    <td>1</td>
+    <td>8535930043</td>
+    <td>Guerra e Paz</td>
+    <td>Liev Tolstoi</td>
+    <td>Pt-br</td>
+    <td>Companhia das Letras</td>
+    <td>1544</td>
+    <td>21/11/2017</td>
+    <td>137,90</td>
+    <td>Ficção Literária</td>
+    <td>300</td>
+    </tr>
+    <tr>
+    <td>2</td>
+    <td>8575226932</td>
+    <td>Estruturas de Dados e Algoritmos com JavaScript: Escreva um Código JavaScript Complexo e Eficaz Usando a Mais Recente</td>
+    <td>Loiane Groner</td>
+    <td>Pt-br</td>
+    <td>Novatec Editora</td>
+    <td>408</td>
+    <td>11/03/2019</td>
+    <td>64,90</td>
+    <td>Programação de Computadores</td>
+    <td>12</td>
+    </tr>
+    <tr>
+    <td>3</td>
+    <td>8575226932</td>
+    <td>Aprendendo Node: Usando JavaScript no Servidor</td>
+    <td>Shelley Powers</td>
+    <td>Pt-br</td>
+    <td>Novatec Editora</td>
+    <td>312</td>
+    <td>24/01/2017</td>
+    <td>70,99</td>
+    <td>Programação de Computadores</td>
+    <td>29</td>
+    </tr>
+    </tbody></table>
+    </li>
+
+    <hr>
+    <li><p>Listar livros por ID: <b>https://livraria-apirest.herokuapp.com/livros/id/2</b></p>
+    <details>
+    <summary>Modelo JSON</summary>
+    <pre><code>
+    {
+        "livros": [
+            {
             "id": 2,
-            "nome": "João",
-            "sobrenome": "Carlos",
-            "cpf": 32648918086
-            "email": "Joao99Carlos99@gmail.com",
-            "telefone": 6627644471
-        },
+                "isbn": "8575226932",
+                "titulo": "Estruturas de Dados e Algoritmos com JavaScript: Escreva um Código JavaScript Complexo e Eficaz Usando a Mais Recente ECMAScript",
+                "autor": "Loiane Groner",
+                "lingua": Pt-br
+                "editora": "Novatec Editora ",
+                "paginas": 408,
+                "publicacao": "11/03/2019",
+                "preco": "64,94",
+                "genero": "Programação de Computadores"
+                "quantidade": 12
+            }
+        ]
+    }
+    </pre></code>
+    </details>
+
+    <table>
+    <thead>
+    <tr>
+    <th>id</th>
+    <th>isbn</th>
+    <th>titulo</th>
+    <th>autor</th>
+    <th>lingua</th>
+    <th>editora</th>
+    <th>paginas</th>
+    <th>publicacao</th>
+    <th>preco</th>
+    <th>genero</th>
+    <th>quantidade</th>
+    </tr>
+    </thead>
+    <tbody><tr>
+    <td>2</td>
+    <td>8575226932</td>
+    <td>Estruturas de Dados e Algoritmos com JavaScript: Escreva um Código JavaScript Xomplexo e Eficaz Usando a Mais Recente</td>
+    <td>Loiane Groner</td>
+    <td>Pt-br</td>
+    <td>Novatec Editora</td>
+    <td>408</td>
+    <td>11/03/2019</td>
+    <td>64,90</td>
+    <td>Programação de Computadores</td>
+    <td>12</td>
+    </tr>
+    </tbody></table>
+    </li>
+
+    <hr>
+    <li>
+    <p>Inserir livros: <b>https://livraria-apirest.herokuapp.com/livros/add</b></p>
+    <details>
+    <summary>Modelo JSON</summary>
+    <pre><code>
+    {
+                "id": 4,
+                "isbn": "978-1449341398",
+                "titulo": "Heroku: Up and Running: Effortless Application Deployment and Scaling",
+                "autor": "Neil Middleton & Richard Schneeman",
+                "lingua": Eng
+                "editora": "O'Reilly Media",
+                "paginas": 125,
+                "publicacao": "07/11/2013",
+                "preco": "42,24",
+                "genero": "Programação de Computadores"
+                "quantidade": 4
+    }
+    </code></pre>
+    </details>
+
+    <table>
+    <thead>
+    <tr>
+    <th>id</th>
+    <th>isbn</th>
+    <th>titulo</th>
+    <th>autor</th>
+    <th>lingua</th>
+    <th>editora</th>
+    <th>paginas</th>
+    <th>publicacao</th>
+    <th>preco</th>
+    <th>genero</th>
+    <th>quantidade</th>
+    </tr>
+    </thead>
+    <tbody><tr>
+    <td>4</td>
+    <td>978-1449341398</td>
+    <td>Heroku: Up and Running: Effortless Application Deployment and Scaling</td>
+    <td>Neil Middleton &amp; Richard Schneeman</td>
+    <td>Eng</td>
+    <td>O&#39;Reilly Media</td>
+    <td>125</td>
+    <td>07/11/2013</td>
+    <td>42,24</td>
+    <td>Programação de Computadores</td>
+    <td>4</td>
+    </tr>
+    </tbody></table>
+    <blockquote>
+    <p>Livro &quot;Heroku: Up and Running: Effortless Application Deployment and Scaling&quot; adicionado com sucesso.</p>
+    </blockquote>
+    </li>
+
+    <hr>
+    <li>
+    <p>Apagar livros por id: <b>https://livraria-apirest.herokuapp.com/livros/delete/2</b></p>
+
+    <table>
+    <thead>
+    <tr>
+    <th>id</th>
+    <th>isbn</th>
+    <th>titulo</th>
+    <th>autor</th>
+    <th>lingua</th>
+    <th>editora</th>
+    <th>paginas</th>
+    <th>publicacao</th>
+    <th>preco</th>
+    <th>genero</th>
+    <th>quantidade</th>
+    </tr>
+    </thead>
+    <tbody><tr>
+    <td><del>2</td>
+    <td><del>8575226932</td>
+    <td><del>Estruturas de Dados e Algoritmos com  JavaScript: Escreva um Código JavaScript Complexo e Eficaz Usando a Mais Recente ECMAScript</td>
+    <td><del>Loiane Groner</td>
+    <td><del>Pt-br</td>
+    <td><del>Novatec Editora</td>
+    <td><del>408</td>
+    <td><del>11/03/2019</td>
+    <td><del>64,90</td>
+    <td><del>Programação de Computadores</td>
+    <td><del>12</td>
+    </tr>
+    </tbody></table>
+    <blockquote>
+    <p>&quot;Id &quot;2&quot; removido do banco de dados.&quot;</p>
+    </blockquote>
+    </li>
+
+    <hr>
+    <li>
+    <p>Atualizar livro por id: <b>https://livraria-apirest.herokuapp.com/livros/update/1</b></p>
+    <details>
+    <pre><code>
+    {
+        "autor": "Tolstoi",
+        "preco": "100",
+    }
+    </code></pre>
+    <summary>Modelo JSON</summary>
+    </details>
+
+    <table>
+    <thead>
+    <tr>
+    <th>id</th>
+    <th>isbn</th>
+    <th>titulo</th>
+    <th>autor</th>
+    <th>lingua</th>
+    <th>editora</th>
+    <th>paginas</th>
+    <th>publicacao</th>
+    <th>preco</th>
+    <th>genero</th>
+    <th>quantidade</th>
+    </tr>
+    </thead>
+    <tbody><tr>
+    <td>1</td>
+    <td>8535930043</td>
+    <td>Guerra e Paz</td>
+    <td>Tolstoi</td>
+    <td>Pt-br</td>
+    <td>Companhia das Letras</td>
+    <td>1544</td>
+    <td>21/11/2017</td>
+    <td>100</td>
+    <td>Ficção Literária</td>
+    <td>300</td>
+    </tr>
+    </tbody></table>
+    <blockquote>
+    <p>Id &quot;1&quot; atualizado.</p>
+    </blockquote>
+    </li>
+    </details>
+
+    <!-- CLIENTES--->
+    <details>
+    <summary>
+    <span style=font-size:18px;>
+        <b>Clientes</b>
+    </span>
+    </summary>
+
+    <ul>
+    <li><p>Listar todos os clientes: <b>https://livraria-apirest.herokuapp.com/clientes</b></p>
+    <details>
+    <summary>Modelo JSON</summary>
+    <pre><code>
+    {
+        "clientes": [
+            {
+                "id": 1,
+                "nome": "André",
+                "sobrenome": "Silva",
+                "cpf": 31673948030
+                "email": "AndréBac4no9@gmail.com",
+                "telefone": 9836447972
+            },
+            {
+                "id": 2,
+                "nome": "João",
+                "sobrenome": "Carlos",
+                "cpf": 32648918086
+                "email": "Joao99Carlos99@gmail.com",
+                "telefone": 6627644471
+            },
+            {
+                "id": 3,
+                "nome": "Maria",
+                "sobrenome": "Brito",
+                "cpf": 09325858096
+                "email": "mariaaAAA20@gmail.com",
+                "telefone": 6698645272
+            }
+        ]
+    }
+    </code></pre>
+    </details>
+
+    <table>
+    <thead>
+    <tr>
+    <th>id</th>
+    <th>nome</th>
+    <th>sobrenome</th>
+    <th>cpf</th>
+    <th>email</th>
+    <th>telefone</th>
+    </tr>
+    </thead>
+    <tbody><tr>
+    <td>1</td>
+    <td>André</td>
+    <td>Silva</td>
+    <td>31673948030</td>
+    <td>AndréBac4no9@gmail<span>.com</span></td>
+    <td>9836447972</td>
+    </tr>
+    <tr>
+    <td>2</td>
+    <td>João</td>
+    <td>Carlos</td>
+    <td>32648918086</td>
+    <td>Joao99Carlos99@gmail<span>.com</span></td>
+    <td>6627644471</td>
+    </tr>
+    <tr>
+    <td>3</td>
+    <td>Maria</td>
+    <td>Brito</td>
+    <td>09325858096</td>
+    <td>mariaaAAA20@gmail<span>.com</span></td>
+    <td>6698645272</td>
+    </tr>
+    </tbody></table>
+    </li>
+
+    <hr>
+    <li><p>Listar cliente por ID: <b>https://livraria-apirest.herokuapp.com/clientes/id/2</b></p>
+    <details>
+    <summary>Modelo JSON</summary>
+    <pre><code>
+    {
+        "clientes": [
+            {
+                "id": 2,
+                "nome": "João",
+                "sobrenome": "Carlos",
+                "cpf": 32648918086
+                "email": "Joao99Carlos99@gmail.com",
+                "telefone": 6627644471
+            }
+        ]
+    }
+    </pre></code>
+    </details>
+
+    <table>
+    <thead>
+    <tr>
+    <th>id</th>
+    <th>nome</th>
+    <th>sobrenome</th>
+    <th>cpf</th>
+    <th>email</th>
+    <th>telefone</th>
+    </tr>
+    </thead>
+    <tbody><tr>
+    <td>2</td>
+    <td>João</td>
+    <td>Carlos</td>
+    <td>32648918086</td>
+    <td>Joao99Carlos99@gmail<span>.com</span></td>
+    <td>6627644471</td>
+    </tr>
+    </tbody></table>
+    </li>
+
+    <hr>
+    <li>
+    <p>Inserir cliente: <b>https://livraria-apirest.herokuapp.com/clientes/add</b></p>
+    <details>
+    <summary>Modelo JSON</summary>
+    <pre><code>
+    {
+        "nome": "Lucas",
+        "sobrenome": "Almeida",
+        "cpf": 41320808034
+        "email": "profLucasAl@gmail.com",
+        "telefone": 8327378874
+    }
+    </code></pre>
+    </details>
+
+    <table>
+    <thead>
+    <tr>
+    <th>id</th>
+    <th>nome</th>
+    <th>sobrenome</th>
+    <th>cpf</th>
+    <th>email</th>
+    <th>telefone</th>
+    </tr>
+    </thead>
+    <tbody><tr>
+    <td>4</td>
+    <td>Lucas</td>
+    <td>Almeida</td>
+    <td>41320808034</td>
+    <td>profLucasAl@gmail<span>.com</span></td>
+    <td>8327378874</td>
+    </tr>
+    </tbody></table>
+    <blockquote>
+    <p>Cliente &quot;Lucas Almeida&quot; adicionado com sucesso.</p>
+    </blockquote>
+    </li>
+
+    <hr>
+    <li>
+    <p>Apagar cliente por id: <b>https://livraria-apirest.herokuapp.com/clientes/delete/2</b></p>
+
+    <table>
+    <thead>
+    <tr>
+    <th>id</th>
+    <th>nome</th>
+    <th>sobrenome</th>
+    <th>cpf</th>
+    <th>email</th>
+    <th>telefone</th>
+    </tr>
+    </thead>
+    <tbody><tr>
+    <td><del>2</td>
+    <td><del>João</td>
+    <td><del>Carlos</td>
+    <td><del>32648918086</td>
+    <td><del>Joao99Carlos99@gmail<span>.com</span></td>
+    <td><del>6627644471</td>
+    </tr>
+    </tbody></table>
+    <blockquote>
+    <p>&quot;Id &quot;2&quot; removido do banco de dados.&quot;</p>
+    </blockquote>
+    </li>
+
+    <hr>
+    <li>
+    <p>Atualizar usuário por id: <b>https://livraria-apirest.herokuapp.com/clientes/update/1</b></p>
+    <details>
+    <pre><code>
+    {
+        "sobrenome": "Silveira",
+        "email": "AndréSilveira@gmail.com",
+    }
+    </code></pre>
+    <summary>Modelo JSON</summary>
+    </details>
+
+    <table>
+    <thead>
+    <tr>
+    <th>id</th>
+    <th>nome</th>
+    <th>sobrenome</th>
+    <th>cpf</th>
+    <th>email</th>
+    <th>telefone</th>
+    </tr>
+    </thead>
+    <tbody><tr>
+    <td>1</td>
+    <td>André</td>
+    <td><b>Silveira</b></td>
+    <td>31673948030</td>
+    <td><b>AndréSilveira@gmail<span>.com</span></b></td>
+    <td>9836447972</td>
+    </tr>
+    </tbody></table>
+    <blockquote>
+    <p>Id &quot;1&quot; atualizado.</p>
+    </blockquote>
+    </li>
+    </details>
+
+    <!-- ALUGUEL--->
+    <details>
+    <summary>
+    <span style=font-size:18px;>
+        <b>Aluguel</b>
+    </span>
+    </summary>
+
+    <ul>
+    <li><p>Listar todos os alugueis: <b>https://livraria-apirest.herokuapp.com/aluguel</b></p>
+    <details>
+    <summary>Modelo JSON</summary>
+    <pre><code>
+    {
+        "aluguel": [
+            {
+                "id": 1,
+                "livro": "Guerra e Paz",
+                "nome": "André",
+                "data de aluguel":01/01/2022,
+                "forma de pagamento": "cartão de crédito",
+                "data de entrega": 25/01/2022,
+            },
+            {
+                "id": 2,
+                "livro": "Estruturas de Dados e Algoritmos com JavaScript: Escreva um Código JavaScript Complexo e Eficaz Usando a Mais Recente ECMAScript",
+                "nome": "João",
+                "data de aluguel": 01/02/2022,
+                "forma de pagamento": "dinheiro",
+                "data de entrega": 25/02/2022,
+            },
+            {
+                "id": 3,
+                "livro": "Aprendendo Node: Usando JavaScript no Servidor",
+                "nome": "Maria",
+                "data de aluguel": 01/03/2022,
+                "forma de pagamento": "cartão de crédito",
+                "data de entrega": 25/03/2022,
+            }
+        ]
+    }
+    </code></pre>
+    </details>
+
+    <table>
+    <thead>
+    <tr>
+    <th>id</th>
+    <th>livro</th>
+    <th>nome</th>
+    <th>data de aluguel</th>
+    <th>forma de pagamento</th>
+    <th>data de entrega</th>
+    </tr>
+    </thead>
+    <tbody><tr>
+    <td>1</td>
+    <td>Guerra e Paz</td>
+    <td>André</td>
+    <td>01/01/2022</td>
+    <td>cartão de crédito</td>
+    <td>25/01/2022</td>
+    </tr>
+    <tr>
+    <td>2</td>
+    <td>Estruturas de Dados e Algoritmos com JavaScript: Escreva um Código JavaScript Complexo e Eficaz Usando a Mais Recente ECMAScript</td>
+    <td>João</td>
+    <td>01/02/2022</td>
+    <td>dinheiro</td>
+    <td>25/02/2022</td>
+    </tr>
+    <tr>
+    <td>3</td>
+    <td>Aprendendo Node: Usando JavaScript no Servidor</td>
+    <td>Maria</td>
+    <td>01/03/2022</td>
+    <td>cartão de crédito</td>
+    <td>25/03/2022</td>
+    </tr>
+    </tbody></table>
+    </li>
+
+    <hr>
+    <li><p>Listar alugueis por ID: <b>https://livraria-apirest.herokuapp.com/aluguel/id/2</b></p>
+    <details>
+    <summary>Modelo JSON</summary>
+    <pre><code>
+    {
+        "aluguel": [
+            {
+                "id": 2,
+                "livro": "Estruturas de Dados e Algoritmos com JavaScript: Escreva um Código JavaScript Complexo e Eficaz Usando a Mais Recente ECMAScript",
+                "nome": "João",
+                "data de aluguel": 01/02/2022,
+                "forma de pagamento": "dinheiro",
+                "data de entrega": 25/02/2022,
+            }
+        ]
+    }
+    </pre></code>
+    </details>
+
+    <table>
+    <thead>
+    <tr>
+    <th>id</th>
+    <th>livro</th>
+    <th>nome</th>
+    <th>data de aluguel</th>
+    <th>forma de pagamento</th>
+    <th>data de entrega</th>
+    </tr>
+    </thead>
+    <tbody><tr>
+    <td>2</td>
+    <td>Estruturas de Dados e Algoritmos com JavaScript: Escreva um Código JavaScript Complexo e Eficaz Usando a Mais Recente ECMAScript</td>
+    <td>João</td>
+    <td>01/02/2022</td>
+    <td>dinheiro</td>
+    <td>25/02/2022</td>
+    </tr>
+    </tbody></table>
+    </li>
+
+    <hr>
+    <li>
+    <p>Inserir aluguel: <b>https://livraria-apirest.herokuapp.com/aluguel/add</b></p>
+    <details>
+    <summary>Modelo JSON</summary>
+    <pre><code>
+    {
+                "id": 4,
+                "livro": "Heroku: Up and Running: Effortless Application Deployment and Scaling",
+                "nome": "Lucas",
+                "data de aluguel": 01/04/2022,
+                "forma de pagamento": "dinheiro",
+                "data de entrega": 25/04/2022,
+    }
+    </code></pre>
+    </details>
+
+    <table>
+    <thead>
+    <tr>
+    <th>id</th>
+    <th>livro</th>
+    <th>nome</th>
+    <th>data de aluguel</th>
+    <th>forma de pagamento</th>
+    <th>data de entrega</th>
+    </tr>
+    </thead>
+    <tbody><tr>
+    <td>4</td>
+    <td>Heroku: Up and Running: Effortless Application Deployment and Scaling</td>
+    <td>Lucas</td>
+    <td>01/04/2022</td>
+    <td>dinheiro</td>
+    <td>25/04/2022</td>
+    </tr>
+    </tbody></table>
+    <blockquote>
+    <p>Aluguel de &quot;Lucas&quot; adicionado com sucesso.</p>
+    </blockquote>
+    </li>
+
+    <hr>
+    <li>
+    <p>Apagar cliente por id: <b>https://livraria-apirest.herokuapp.com/aluguel/delete/2</b></p>
+
+    <table>
+    <thead>
+    <tr>
+    <th>id</th>
+    <th>livro</th>
+    <th>nome</th>
+    <th>data de aluguel</th>
+    <th>forma de pagamento</th>
+    <th>data de entrega</th>
+    </tr>
+    </thead>
+    <tbody><tr>
+    <td><del>2</td>
+    <td><del>Estruturas de Dados e Algoritmos com JavaScript: Escreva um Código JavaScript Complexo e Eficaz Usando a Mais Recente ECMAScript</td>
+    <td><del>João</td>
+    <td><del>01/02/2022</td>
+    <td><del>dinheiro</td>
+    <td><del>25/02/2022</td>
+    </tr>
+    </tbody></table>
+    <blockquote>
+    <p>&quot;Id &quot;2&quot; removido do banco de dados.&quot;</p>
+    </blockquote>
+    </li>
+
+    <hr>
+    <li>
+    <p>Atualizar usuário por id: <b>https://livraria-apirest.herokuapp.com/aluguel/update/1</b></p>
+    <details>
+    <pre><code>
+    {
+        "nome": "Ivan",
+        "livro": "Teoria da Moeda",
+    }
+    </code></pre>
+    <summary>Modelo JSON</summary>
+    </details>
+
+    <table>
+    <thead>
+    <tr>
+    <th>id</th>
+    <th>livro</th>
+    <th>nome</th>
+    <th>data de aluguel</th>
+    <th>forma de pagamento</th>
+    <th>data de entrega</th>
+    </tr>
+    </thead>
+    <tbody><tr>
+    <td>1</td>
+    <td>Guerra e Paz</td>
+    <td><b>André Henrique</b></td>
+    <td>01/01/2022</td>
+    <td><b>cartão de débito</b></td>
+    <td>25/01/2022</td>
+    </tr>
+    </tbody></table>
+    <blockquote>
+    <p>Id &quot;1&quot; atualizado.</p>
+    </blockquote>
+    </li>
+    </details>
+
+    <details>
+    <summary>
+    <span style=font-size:18px;>
+        <b>Funcionários</b>
+    </span>
+    </summary>
+    <ul>
+    <li><p>Listar todos os funcionarios: <b>https://livraria-apirest.herokuapp.com/funcionarios</b></p>
+    <details>
+    <summary>Modelo JSON</summary>
+    <pre><code>
+    {
+        "Funcionarios": [
+            {
+                "id": 1,
+                "nome": "Lucas",
+                "sobrenome": "Silva",
+                "data_de_nascimento": 27/06/2000,
+                "data_de_admissao": 23/04/2020,
+                "telefone": 9836447972,
+                "email": "lucasBac4no9@gmail.com",
+                "funcao": "Auxiliar Administrativo"
+                
+    <pre><code>    }
         {
-            "id": 3,
-            "nome": "Maria",
-            "sobrenome": "Brito",
-            "cpf": 09325858096
-            "email": "mariaaAAA20@gmail.com",
-            "telefone": 6698645272
+            &quot;id&quot;: 2,
+            &quot;nome&quot;: &quot;Fernanda&quot;,
+            &quot;sobrenome&quot;: &quot;Oliveira&quot;,
+            &quot;data_de_nascimento&quot;: 04/04/1996,
+            &quot;data_de_admissao&quot;: 19/02/2018,
+            &quot;telefone&quot;: 996455432,
+            &quot;email&quot;: &quot;fernanda_oliveira@gmail.com&quot;,
+            &quot;funcao&quot;: &quot;Secretária&quot;
+        }
+        {
+            &quot;id&quot;: 3,
+            &quot;nome&quot;: &quot;Maria Luiza&quot;,
+            &quot;sobrenome&quot;: &quot;Alcântara&quot;,
+            &quot;data_de_nascimento&quot;: 15/05/1980,
+            &quot;data_de_admissao&quot;: 19/03/2002,
+            &quot;telefone&quot;: 995478938,
+            &quot;email&quot;: &quot;mariaLu1980@gmail.com&quot;,
+            &quot;funcao&quot;: &quot;Gerente&quot;
         }
     ]
-}
-</code></pre>
-</details>
+    </code></pre>
+    <p>}
+    </code></pre></p>
+    </details>
 
-|id|nome|sobrenome|cpf|email|telefone|
-|---|---|---|---|---|---|
-|1|André|Silva|31673948030|AndréBac4no9@gmail<span>.com</span>|9836447972
-|2|João|Carlos|32648918086|Joao99Carlos99@gmail<span>.com</span>|6627644471
-|3|Maria|Brito|09325858096|mariaaAAA20@gmail<span>.com</span>|6698645272
+    <table>
+    <thead>
+    <tr>
+    <th>id</th>
+    <th>nome</th>
+    <th>sobrenome</th>
+    <th>data_de_nascimento</th>
+    <th>data_de_admissao</th>
+    <th>telefone</th>
+    <th>email</th>
+    <th>funcao</th>
+    </tr>
+    </thead>
+    <tbody><tr>
+    <td>1</td>
+    <td>Lucas</td>
+    <td>Silva</td>
+    <td>27/06/2000</td>
+    <td>23/04/2020</td>
+    <td>9836447972</td>
+    <td>lucasBac4no9@gmail<span>.com</span></td>
+    <td>Auxiliar Administrativo</td>
+    </tr>
+    <tr>
+    <td>2</td>
+    <td>Fernanda</td>
+    <td>Oliveira</td>
+    <td>04/04/1996</td>
+    <td>19/02/2018</td>
+    <td>996455432</td>
+    <td>fernanda_oliveira@<span>.com</span></td>
+    <td>Secretária</td>
+    </tr>
+    <tr>
+    <td>3</td>
+    <td>Maria Luiza</td>
+    <td>Alcântara</td>
+    <td>15/05/1980</td>
+    <td>19/03/2002</td>
+    <td>995478938</td>
+    <td>mariaLu1980@gmail<span>.com</span></td>
+    <td>Gerente</td>
+    </tr>
+    </tbody></table>
+    </li>
 
-</li>
+    <hr>
+    <li><p>Listar funcionario por ID: <b>https://livraria-apirest.herokuapp.com/funcionarios/id/2</b></p>
+    <details>
+    <summary>Modelo JSON</summary>
+    <pre><code>
+    {
+        "Funcionario": [
+            {
+                "id": 2,
+                "nome": "Fernanda",
+                "sobrenome": "Oliveira",
+                "data_de_nascimento": 04/04/1996,
+                "data_de_admissao": 19/02/2018,
+                "telefone": 996455432,
+                "email": "fernanda_oliveira@gmail.com",
+                "funcao": "Secretária"
+            }
+        ]
+    }
+    </pre></code>
+    </details>
 
----
+    <table>
+    <thead>
+    <tr>
+    <th>id</th>
+    <th>nome</th>
+    <th>sobrenome</th>
+    <th>data_de_nascimento</th>
+    <th>data_de_admissao</th>
+    <th>telefone</th>
+    <th>email</th>
+    <th>funcao</th>
+    </tr>
+    </thead>
+    <tbody><tr>
+    <td>2</td>
+    <td>Fernanda</td>
+    <td>Oliveira</td>
+    <td>04/04/1996</td>
+    <td>19/02/2018</td>
+    <td>996455432</td>
+    <td>fernanda_oliveira@<span>.com</span></td>
+    <td>Secretária</td>
+    </tr>
+    </tbody></table>
+    </li>
 
-<li><p>Listar cliente por ID: <b>http://localhost:3000/livros/id/2</b></p>
-<details>
-<summary>Modelo JSON</summary>
-<pre><code>
-{
-    "livros": [
-        {
-            "id": 2,
-            "nome": "João",
-            "sobrenome": "Carlos",
-            "cpf": 32648918086
-            "email": "Joao99Carlos99@gmail.com",
-            "telefone": 6627644471
-        }
-    ]
-}
-</pre></code>
-</details>
+    <hr>
+    <li>
+    <p>Inserir funcionario: <b>https://livraria-apirest.herokuapp.com/funcionarios/add</b></p>
+    <details>
+    <summary>Modelo JSON</summary>
+    <pre><code>
+    {
+        "nome": "Maria Luiza",
+        "sobrenome": "Alcântara",
+        "data_de_nascimento": 15/05/1980,
+        "data_de_admissao": 19/03/2002,
+        "telefone": 995478938,
+        "email": "mariaLu1980@gmail.com",
+        "funcao": "Gerente"
+    }
 
-|id|nome|sobrenome|cpf|email|telefone|
-|---|---|---|---|---|---|
-|2|João|Carlos|32648918086|Joao99Carlos99@gmail<span>.com</span>|6627644471
+    <p></code></pre></p>
+    </details>
 
-</li>
+    <table>
+    <thead>
+    <tr>
+    <th>id</th>
+    <th>nome</th>
+    <th>sobrenome</th>
+    <th>data_de_nascimento</th>
+    <th>data_de_admissao</th>
+    <th>telefone</th>
+    <th>email</th>
+    <th>funcao</th>
+    </tr>
+    </thead>
+    <tbody><tr>
+    <td>3</td>
+    <td>Maria Luiza</td>
+    <td>Alcântara</td>
+    <td>15/05/1980</td>
+    <td>19/03/2002</td>
+    <td>995478938</td>
+    <td>mariaLu1980@gmail<span>.com</span></td>
+    <td>Gerente</td>
+    </tr>
+    </tbody></table>
+    <blockquote>
+    <p>Funcionario &quot;Maria Luiza Alcântara&quot; adicionado com sucesso.</p>
+    </blockquote>
+    </li>
 
----
+    <hr>
+    <li>
+    <p>Apagar funcionario por id: <b>https://livraria-apirest.herokuapp.com/funcionarios/delete/1</b></p>
 
-<li>
-<p>Inserir cliente: <b>http://localhost:3000/livros/add</b></p>
-<details>
-<summary>Modelo JSON</summary>
-<pre><code>
-{
-    "nome": "Lucas",
-    "sobrenome": "Almeida",
-    "cpf": 41320808034
-    "email": "profLucasAl@gmail.com",
-    "telefone": 8327378874
-}
-</code></pre>
-</details>
+    <table>
+    <thead>
+    <tr>
+    <th>id</th>
+    <th>nome</th>
+    <th>sobrenome</th>
+    <th>data_de_nascimento</th>
+    <th>data_de_admissao</th>
+    <th>telefone</th>
+    <th>email</th>
+    <th>funcao</th>
+    </tr>
+    </thead>
+    <tbody><tr>
+    <td><del>1</td>
+    <td><del>Lucas</td>
+    <td><del>Silva</td>
+    <td><del>27/06/2000</td>
+    <td><del>23/04/2020</td>
+    <td><del>9836447972</td>
+    <td><del>lucasBac4no9@gmail<span>.com</span></td>
+    <td><del>Auxiliar Administrativo</td>
+    </tr>
+    </tbody></table>
+    <blockquote>
+    <p>&quot;Id &quot;1&quot; removido do banco de dados.&quot;</p>
+    </blockquote>
+    </li>
 
-|id|nome|sobrenome|cpf|email|telefone|
-|---|---|---|---|---|---|
-|4|Lucas|Almeida|41320808034|profLucasAl@gmail<span>.com</span>|8327378874
+    <hr>
+    <li>
+    <p>Atualizar funcionario por id: <b>https://livraria-apirest.herokuapp.com/funcionarios/update/1</b></p>
+    <details>
+    <summary>Modelo JSON</summary>
+    <pre><code>
+    {
+        "sobrenome": "Silva",
+        "email": "lucasSilva20@gmail.com",
+    }
+    </code></pre>
+    </details>
 
+    <table>
+    <thead>
+    <tr>
+    <th>id</th>
+    <th>nome</th>
+    <th>sobrenome</th>
+    <th>data_de_nascimento</th>
+    <th>data_de_admissao</th>
+    <th>telefone</th>
+    <th>email</th>
+    <th>funcao</th>
+    </tr>
+    </thead>
+    <tbody><tr>
+    <td>1</td>
+    <td>Lucas</td>
+    <td><b>Silva</b></td>
+    <td>27/06/2000</td>
+    <td>23/04/2020</td>
+    <td>9836447972</td>
+    <td><b>lucasSilva20@gmail<span>.com</span></b></td>
+    <td><b>Auxiliar Administrativo</b></td>
+    </tr>
+    </tbody></table>
+    <blockquote>
+    <p>Id &quot;1&quot; atualizado.</p>
+    </blockquote>
+    </li>
+    </details>
 
-> Cliente "Lucas Almeida" adicionado com sucesso.
+    <details>
+    <summary>
+    <span style=font-size:18px;>
+        <b>Fornecedores</b>
+    </span>
+    </summary>
+    <ul>
+    <li><p>Listar todos os fornecedores: <b>https://livraria-apirest.herokuapp.com/fornecedores</b></p>
+    <details>
+    <summary>Modelo JSON</summary>
+    <pre><code>
+    {
+        "Fornecedores": [
+            {
+                "id": 1,
+                "nome": "Carlos Francisco",
+                "cnpj": 02.234.456/0001-89,
+                "endereco":"Rua Jacaré, 345, Vila Velha - BH/MG",
+                "contaBancaria":"Ag: 1234, Cc:12345-7"
+            }       
+            {
+                "id": 2,
+                "nome": "João Antônio",
+                "cnpj": 01.234.546/0002-78,
+                "endereco":"Rua Sabino, 27, Santa Cruz - Go/GO",
+                "contaBancaria":"Ag: 4321, Cc:76549-0"
+            }
+            {
+                "id": 3,
+                "nome": "Ana Vasconcelos",
+                "cnpj": 03.567.031/0003-69,
+                "endereco":"Avenida Floris, Cerejeira - Sc/PA",
+                "contaBancaria":"Ag: 7654, Cc:24567-3"
+            }
+        ]   
+    }        
 
-</li>
+    <p></code></pre></p>
+    </details>
 
----
+    <table>
+    <thead>
+    <tr>
+    <th>id</th>
+    <th>nome</th>
+    <th>cnpj</th>
+    <th>endereco</th>
+    <th>contaBancaria</th>
+    </tr>
+    </thead>
+    <tbody><tr>
+    <td>1</td>
+    <td>Carlos Francisco</td>
+    <td>02.234.456/0001-89</td>
+    <td>Rua Jacaré, 345, Vila Velha - BH/MG</td>
+    <td>Ag: 1234, Cc:12345-7</td>
+    </tr>
+    <tr>
+    <td>2</td>
+    <td>João Antônio</td>
+    <td>01.234.546/0002-78</td>
+    <td>Rua Sabino, 27, Santa Cruz - Go/GO</td>
+    <td>Ag: 4321, Cc:76549-0</td>
+    </tr>
+    <tr>
+    <td>3</td>
+    <td>Ana Vasconcelos</td>
+    <td>03.567.031/0003-69</td>
+    <td>Avenida Floris, Cerejeira - Sc/PA</td>
+    <td>Ag: 7654, Cc:24567-3</td>
+    </tr>
+    </tbody></table>
+    </li>
 
-<li>
-<p>Apagar cliente por id: <b>http://localhost:3000/livros/delete/2</b></p>
+    <hr>
+    <li><p>Listar fornecedor por ID: <b>https://livraria-apirest.herokuapp.com/fornecedores/id/2</b></p>
+    <details>
+    <summary>Modelo JSON</summary>
+    <pre><code>
+    {
+        "Funcionario": [
+            {
+                "id": 2,
+                "nome": "João Antônio",
+                "cnpj": 01.234.546/0002-78,
+                "endereco":"Rua Sabino, 27, Santa Cruz - Go/GO",
+                "contaBancaria":"Ag: 4321, Cc:76549-0"
+            }
+        ]
+    }
+    </pre></code>
+    </details>
 
-|id|nome|sobrenome|cpf|email|telefone|
-|---|---|---|---|---|---|
-|<del>2|<del>João|<del>Carlos|<del>32648918086|<del>Joao99Carlos99@gmail<span>.com</span>|<del>6627644471
+    <table>
+    <thead>
+    <tr>
+    <th>id</th>
+    <th>nome</th>
+    <th>cnpj</th>
+    <th>endereco</th>
+    <th>contaBancaria</th>
+    </tr>
+    </thead>
+    <tbody><tr>
+    <td>2</td>
+    <td>João Antônio</td>
+    <td>01.234.546/0002-78</td>
+    <td>Rua Sabino, 27, Santa Cruz - Go/GO</td>
+    <td>Ag: 4321, Cc:76549-0</td>
+    </tr>
+    </tbody></table>
+    </li>
 
-> "Id "2" removido do banco de dados."
+    <hr>
+    <li>
+    <p>Inserir fornecedor: <b>https://livraria-apirest.herokuapp.com/fornecedores/add</b></p>
+    <details>
+    <summary>Modelo JSON</summary>
+    <pre><code>
+    {
+        "nome": "Ana Vasconcelos",
+        "cnpj": 03.567.031/0003-69,
+        "endereco":"Avenida Floris, Cerejeira - Sc/PA",
+        "contaBancaria":"Ag: 7654, Cc:24567-3"
+    }
 
-</li>
+    <p></code></pre></p>
+    </details>
 
----
+    <table>
+    <thead>
+    <tr>
+    <th>id</th>
+    <th>nome</th>
+    <th>cnpj</th>
+    <th>endereco</th>
+    <th>contaBancaria</th>
+    </tr>
+    </thead>
+    <tbody><tr>
+    <td>3</td>
+    <td>Ana Vasconcelos</td>
+    <td>03.567.031/0003-69</td>
+    <td>Avenida Floris, Cerejeira - Sc/PA</td>
+    <td>Ag: 7654, Cc:24567-3</td>
+    </tr>
+    </tbody></table>
+    <blockquote>
+    <p>Funcionario &quot;Ana Vasconcelos&quot; adicionado com sucesso.</p>
+    </blockquote>
+    </li>
 
-<li>
-<p>Atualizar usuário por id: <b>http://localhost:3000/livros/update/1</b></p>
-<details>
-<pre><code>
-{
-    "sobrenome": "Silveira",
-    "email": "AndréSilveira@gmail.com",
-}
-</code></pre>
-<summary>Modelo JSON</summary>
-</details>
+    <hr>
+    <li>
+    <p>Apagar fornecedor por id: <b>https://livraria-apirest.herokuapp.com/fornecedores/delete/1</b></p>
 
-|id|nome|sobrenome|cpf|email|telefone|
-|---|---|---|---|---|---|
-|1|André|<b>Silveira</b>|31673948030|<b>AndréSilveira@gmail<span>.com</span></b>|9836447972
+    <table>
+    <thead>
+    <tr>
+    <th>id</th>
+    <th>nome</th>
+    <th>cnpj</th>
+    <th>endereco</th>
+    <th>contaBancaria</th>
+    </tr>
+    </thead>
+    <tbody><tr>
+    <td><del>1</td>
+    <td><del>Carlos Francisco</td>
+    <td><del>02.234.456/0001-89</td>
+    <td><del>Rua Jacaré, 345, Vila Velha - BH/MG</td>
+    <td><del>Ag: 1234, Cc:12345-7</td>
+    </tr>
+    </tbody></table>
+    <blockquote>
+    <p>&quot;Id &quot;1&quot; removido do banco de dados.&quot;</p>
+    </blockquote>
+    </li>
 
-> Id "1" atualizado.
-</li>
-</details>
+    <hr>
+    <li>
+    <p>Atualizar fornecedor por id: <b>https://livraria-apirest.herokuapp.com/fornecedores/update/2</b></p>
+    <details>
+    <summary>Modelo JSON</summary>
+    <pre><code>
+    {
+        "nome": "João Antônio",
+        "endereco": "Rua Felislândia, 46, Félix, Go/GO",
 
-<!-- CLIENTES--->
-<details>
-<summary>
-<span style=font-size:20px;color:white;>
-    <b>Clientes</b>
-</span>
-</summary>
+    <p>}</p>
+    <p></code></pre></p>
+    </details>
 
-<ul>
-<li><p>Listar todos os clientes: <b>http://localhost:3000/clientes</b></p>
-<details>
-<summary>Modelo JSON</summary>
-<pre><code>
-{
-    "clientes": [
-        {
-            "id": 1,
-            "nome": "André",
-            "sobrenome": "Silva",
-            "cpf": 31673948030
-            "email": "AndréBac4no9@gmail.com",
-            "telefone": 9836447972
-        },
-        {
-            "id": 2,
-            "nome": "João",
-            "sobrenome": "Carlos",
-            "cpf": 32648918086
-            "email": "Joao99Carlos99@gmail.com",
-            "telefone": 6627644471
-        },
-        {
-            "id": 3,
-            "nome": "Maria",
-            "sobrenome": "Brito",
-            "cpf": 09325858096
-            "email": "mariaaAAA20@gmail.com",
-            "telefone": 6698645272
-        }
-    ]
-}
-</code></pre>
-</details>
+    <table>
+    <thead>
+    <tr>
+    <th>id</th>
+    <th>nome</th>
+    <th>cnpj</th>
+    <th>endereco</th>
+    <th>contaBancaria</th>
+    </tr>
+    </thead>
+    <tbody><tr>
+    <td>2</td>
+    <td><b>Joao Antônio</b></td>
+    <td>01.234.546/0002-78</td>
+    <td><b>Rua Felislândia, 46, Félix, Go/GO</b></td>
+    <td><b>Ag: 4321, Cc:76549-0</b></td>
+    </tr>
+    </tbody></table>
+    <blockquote>
+    <p>Id &quot;2&quot; atualizado.</p>
+    </blockquote>
+    </li>
+    </details>
 
-|id|nome|sobrenome|cpf|email|telefone|
-|---|---|---|---|---|---|
-|1|André|Silva|31673948030|AndréBac4no9@gmail<span>.com</span>|9836447972
-|2|João|Carlos|32648918086|Joao99Carlos99@gmail<span>.com</span>|6627644471
-|3|Maria|Brito|09325858096|mariaaAAA20@gmail<span>.com</span>|6698645272
+    <!-- ALUGUEIS--->
 
-</li>
+    <h2>Equipe</h2>
 
----
-
-<li><p>Listar cliente por ID: <b>http://localhost:3000/clientes/id/2</b></p>
-<details>
-<summary>Modelo JSON</summary>
-<pre><code>
-{
-    "clientes": [
-        {
-            "id": 2,
-            "nome": "João",
-            "sobrenome": "Carlos",
-            "cpf": 32648918086
-            "email": "Joao99Carlos99@gmail.com",
-            "telefone": 6627644471
-        }
-    ]
-}
-</pre></code>
-</details>
-
-|id|nome|sobrenome|cpf|email|telefone|
-|---|---|---|---|---|---|
-|2|João|Carlos|32648918086|Joao99Carlos99@gmail<span>.com</span>|6627644471
-
-</li>
-
----
-
-<li>
-<p>Inserir cliente: <b>http://localhost:3000/clientes/add</b></p>
-<details>
-<summary>Modelo JSON</summary>
-<pre><code>
-{
-    "nome": "Lucas",
-    "sobrenome": "Almeida",
-    "cpf": 41320808034
-    "email": "profLucasAl@gmail.com",
-    "telefone": 8327378874
-}
-</code></pre>
-</details>
-
-|id|nome|sobrenome|cpf|email|telefone|
-|---|---|---|---|---|---|
-|4|Lucas|Almeida|41320808034|profLucasAl@gmail<span>.com</span>|8327378874
-
-
-> Cliente "Lucas Almeida" adicionado com sucesso.
-
-</li>
-
----
-
-<li>
-<p>Apagar cliente por id: <b>http://localhost:3000/clientes/delete/2</b></p>
-
-|id|nome|sobrenome|cpf|email|telefone|
-|---|---|---|---|---|---|
-|<del>2|<del>João|<del>Carlos|<del>32648918086|<del>Joao99Carlos99@gmail<span>.com</span>|<del>6627644471
-
-> "Id "2" removido do banco de dados."
-
-</li>
-
----
-
-<li>
-<p>Atualizar usuário por id: <b>http://localhost:3000/clientes/update/1</b></p>
-<details>
-<pre><code>
-{
-    "sobrenome": "Silveira",
-    "email": "AndréSilveira@gmail.com",
-}
-</code></pre>
-<summary>Modelo JSON</summary>
-</details>
-
-|id|nome|sobrenome|cpf|email|telefone|
-|---|---|---|---|---|---|
-|1|André|<b>Silveira</b>|31673948030|<b>AndréSilveira@gmail<span>.com</span></b>|9836447972
-
-> Id "1" atualizado.
-</li>
-</details>
-
-<!-- ALUGUEIS--->
+    <ul>
+    <li><h4>Gabriel Lopes<h4></li>
+    🔗 <a target="_blank" href="https://github.com/C836" >Github </a> 
+    🔗 <a target="_blank" href="https://www.linkedin.com/in/gabriel-lopes8/">Linkedin </a>
+    </p>
+    <li><h4>Jessica Santos</h4></li>
+    🔗 <a target="_blank" href="https://github.com/Jessaint">Github </a>
+    🔗 <a target="_blank" href="https://www.linkedin.com/in/jessicasjesus/">Linkedin </a>
+    </p>
+    <li><h4>Madalena Brito</h4></li>
+    🔗 <a target="_blank" href="https://github.com/Mada-k">Github </a>
+    🔗 <a target="_blank" href="https://www.linkedin.com/in/madalenabrito/">Linkedin </a>
+    </p>
+    <li><h4>Rafael Henrique</h4></li>
+    🔗 <a target="_blank" href="https://github.com/rhenriique">Github </a>
+    🔗 <a target="_blank" href="https://www.linkedin.com/in/rafael-henrique-santos-b96a32216/">Linkedin </a>
+    </p>
+    <li><h4>Tiago Medeiros</h4></li>
+    🔗 <a target="_blank" href="https://github.com/tiagocpmedeiros">Github </a>
+    🔗 <a target="_blank" href="https://www.linkedin.com/in/tiagocpmedeiros/">Linkedin </a>
+    </ul>
+    :)
+</body>
+</html>
