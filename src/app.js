@@ -16,7 +16,7 @@ import router_alugueis from './controllers/routes/rota_alugueis.js';
 import router_funcionarios from './controllers/routes/rota_funcionarios.js';
 import router_fornecedores from './controllers/routes/rota_fornecedores.js';
 
-const PORT = process.env.PORT||3000
+const PORT = process.env.PORT||3001
 const app = express();
 
 app.use(cors())

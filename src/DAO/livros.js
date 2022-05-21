@@ -9,6 +9,7 @@ export default async function criarTabelaLivros(){
             titulo TEXT,
             autor TEXT,
             lingua TEXT,
+            capa TEXT,
             editora TEXT,
             paginas INTEGER,
             publicacao DATE,
@@ -38,14 +39,15 @@ export async function exibirLivro(id, response){
 export async function inserirLivro(Livros, response){
     openDb().then(db=>{
         db.run(`
-            INSERT INTO Livros(isbn, titulo, autor, lingua, editora,
+            INSERT INTO Livros(isbn, titulo, autor, lingua, capa , editora,
                  paginas, publicacao, genero, quantidade, preco)
-            VALUES(?,?,?,?,?,?,?,?,?,?)`,[
+            VALUES(?,?,?,?,?,?,?,?,?,?,?)`,[
             
         Livros.isbn,
         Livros.titulo,
         Livros.autor ,
         Livros.lingua ,
+        Livros.capa ,
         Livros.editora ,
         Livros.paginas ,
         Livros.publicacao ,
@@ -61,12 +63,13 @@ export async function editarLivro(id, Livros, response){
     openDb().then(db=>{
         db.run(`
             UPDATE Livros SET
-            isbn=?, titulo=?, autor=?, lingua=?, editora=?, paginas=?, publicacao=?, preco=?, genero=?, quantidade=?
+            isbn=?, titulo=?, autor=?, lingua=?, capa=? , editora=?, paginas=?, publicacao=?, preco=?, genero=?, quantidade=?
             WHERE id=?`,[
                 Livros.isbn,
                 Livros.titulo,
                 Livros.autor ,
                 Livros.lingua ,
+                Livros.capa ,
                 Livros.editora ,
                 Livros.paginas ,
                 Livros.publicacao ,
