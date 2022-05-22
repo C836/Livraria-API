@@ -40,7 +40,7 @@ export async function inserirLivro(Livros, response){
     openDb().then(db=>{
         db.run(`
             INSERT INTO Livros(isbn, titulo, autor, lingua, capa , editora,
-                 paginas, publicacao, genero, quantidade, preco)
+                 paginas, publicacao, preco , genero, quantidade)
             VALUES(?,?,?,?,?,?,?,?,?,?,?)`,[
             
         Livros.isbn,

@@ -8,7 +8,6 @@ class cliente{
     }
     validar(cpf){
         if(String(cpf).length===11) return cpf
-        else throw new Error (`Erro: CPF invalido`)
     }
 }
 
