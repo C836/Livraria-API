@@ -1,6 +1,5 @@
-let id = 0
 class livros{
-    constructor(isbn,titulo, autor, lingua, capa, editora, paginas, publicacao, preco, genero, quantidade){
+    constructor(isbn,titulo, autor, lingua, capa, editora, paginas, publicacao, preco, genero, quantidade, descricao, avaliacao){
         this.isbn = isbn;
         this.titulo = titulo;
         this.autor = autor;
@@ -12,9 +11,9 @@ class livros{
         this.preco = preco;
         this.genero = genero;
         this.quantidade = quantidade;
+        this.descricao = descricao;
+        this.avaliacao = avaliacao
     }
-    //metodos de validação
-    //this.isbn = validarIsbn(isbn)
 }
 
 export default livros
