@@ -1,0 +1,139 @@
+{
+"isbn": 8568014003,
+"titulo": "Mais esperto que o Diabo",
+"autor": "Napoleon Hill",
+"lingua": "pt-br",
+"capa": "https://images-na.ssl-images-amazon.com/images/I/71RkRMu5tAL.jpg",
+"editora": "Sharon L. Lechter",
+"paginas": 144,
+"publicacao": "Junho 2011",
+"preco": 25.00,
+"genero": "autoajuda",
+"quantidade":12,
+}
+
+{
+"isbn": 8575422391,
+"titulo": "Os segredos da mente milionária: Aprenda a enriquecer mudando seus conceitos sobre o dinheiro e adotando os hábitos das pessoas bem-sucedidas",
+"autor": "T. Harv Eker",
+"lingua": "pt-br",
+"capa": "https://images-na.ssl-images-amazon.com/images/I/81ZnJcgjCdL.jpg",
+"editora": " Editora Sextante",
+"paginas": 176,
+"publicacao": "Feveiro de 2005",
+"preco": 29.90,
+"genero": "Finanças",
+"quantidade":8,
+}
+
+{
+"isbn": 8550801488,
+"titulo": "Pai rico, pai pobre",
+"autor": "Robert T. Kiyosaki",
+"lingua": "pt-br",
+"capa": "https://m.media-amazon.com/images/I/519kRFUvDOL.jpg",
+"editora": "Alta Books",
+"paginas": 336,
+"publicacao": "1997",
+"preco": 34.60,
+"genero": "Finanças pessoais",
+"quantidade":3,
+}
+
+{
+"isbn": 8535933921,
+"titulo": "Sapiens (Nova edição): Uma breve história da humanidade",
+"autor": "Yuval Novah Harari",
+"lingua": "pt-br",
+"capa": "https://images-na.ssl-images-amazon.com/images/I/71-ghLb8qML.jpg",
+"editora": "Companhia de letras",
+"paginas": 472,
+"publicacao": "2011",
+"preco": 50.90,
+"genero": "Geografia",
+"quantidade":11,
+}
+
+{
+"isbn": ,
+"titulo": "Ação humana",
+"autor": "Ludwig Von Mises",
+"lingua": "pt-br",
+"capa": "https://images-na.ssl-images-amazon.com/images/I/81MTFS0hmDL.jpg",
+"editora": "LVM Editora",
+"paginas": 1020,
+"publicacao": "1949",
+"preco": 238.90,
+"genero": "Ciência Econômica",
+"quantidade":2,
+}
+
+{
+"isbn": 8581190790,
+"titulo": "Democracia - O Deus que falhou",
+"autor": "Hans Hermann Hoppe",
+"lingua": "pt-br",
+"capa": "https://m.media-amazon.com/images/I/51aEUtZdboL.jpg",
+"editora": "LVM Editora",
+"paginas": 372,
+"publicacao": "2001",
+"preco": 54.20,
+"genero": "Ciências Políticas",
+"quantidade":7,
+}
+
+{
+"isbn": 8595070687,
+"titulo": "Anatomia do Estado",
+"autor": "Murray N. Rothbard",
+"lingua": "pt-br",
+"capa": "https://images-na.ssl-images-amazon.com/images/I/71LXJIN81uL.jpg",
+"editora": "Vide Editorial",
+"paginas": 80,
+"publicacao": "1974",
+"preco": 23.00,
+"genero": "Ciências Sociais",
+"quantidade":17,
+}
+
+{
+"isbn": 8581190510,
+"titulo": "O que o governo fez com o nosso dinheiro?",
+"autor": "Murray N. Rothbard",
+"lingua": "pt-br",
+"capa": "https://images-na.ssl-images-amazon.com/images/I/91sTY56llDL.jpg",
+"editora": "LVM Editora",
+"paginas": 105,
+"publicacao": "1963",
+"preco": 21.50,
+"genero": "Economia",
+"quantidade":20,
+}
+
+{
+"isbn": 8593751253,
+"titulo": "As seis lições",
+"autor": "Ludwig Von Mises",
+"lingua": "pt-br",
+"capa": "https://images-na.ssl-images-amazon.com/images/I/71cA1CzENgL.jpg",
+"editora": "LVM Editora",
+"paginas": 184,
+"publicacao": "1979",
+"preco": 25.90,
+"genero": "Ciências Sociais",
+"quantidade":9,
+}
+
+{
+"isbn":  8593751555,
+"titulo": "A Lei",
+"autor": "Frederic Bastiat",
+"lingua": "pt-br",
+"capa": "https://images-na.ssl-images-amazon.com/images/I/81k3hynIp2L.jpg",
+"editora": "LVM Editora",
+"paginas": 128,
+"publicacao": "1850",
+"preco":22.40,
+"genero": "Ciências Sociais",
+"quantidade":6,
+}
